@@ -1,28 +1,42 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
+  "compilerOptions": {
+    "target": "ESNext",
 
-        "experimentalDecorators": true,
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
+    "experimentalDecorators": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
 
-        "jsx": "react-jsx",
+    "jsx": "preserve",
 
-        "declaration": true,
-        "downlevelIteration": true,
-        "noImplicitAny": false,
-        "strictNullChecks": false,
-        "suppressImplicitAnyIndexErrors": true
-    }
+    "declaration": true,
+    "downlevelIteration": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+
+    "noImplicitReturns": false,
+    "incremental": true,
+    "declarationMap": true,
+    "moduleDetection": "force",
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "stripInternal": true,
+    "include": [
+      "global.d.ts",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx"
+    ]
   }
+}

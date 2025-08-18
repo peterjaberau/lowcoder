@@ -20,14 +20,16 @@
       "import": "./dist/appView.js",
       "require": "./dist/appView.js"
     },
-    "./dataSource": {
-      "types": "./dataSource.d.ts"
-    },
     "./dist/style.css": {
       "import": "./dist/style.css"
     },
     "./dist/chunks/": {
       "import": "./dist/chunks/"
+    },
+    "./dataSource": {
+      "import": "./dist/dataSource.js",
+      "require": "./dist/dataSource.js",
+      "types": "./dataSource.d.ts"
     }
   },
   "scripts": {
@@ -42,7 +44,7 @@
     "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-url": "^7.0.0",
     "@svgr/rollup": "^6.3.1",
-    "@vitejs/plugin-react": "^2.2.0",
+    "@vitejs/plugin-react": "^4.7.0",
     "rollup": "^2",
     "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-node-builtins": "^2.1.2",
@@ -50,8 +52,9 @@
     "rollup-plugin-polyfill-node": "^0.10.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript": "^1.0.1",
-    "typescript": "^5",
-    "vite": "^4.5.5",
+    "typescript": "5.8.3",
+    "vite": "^7.0.5",
+    "vite-plugin-dts": "4.5.4",
     "vite-plugin-svgr": "^2.2.2",
     "vite-tsconfig-paths": "^3.6.0"
   },

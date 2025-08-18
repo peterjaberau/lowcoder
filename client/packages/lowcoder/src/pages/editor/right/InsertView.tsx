@@ -1,25 +1,25 @@
-import Segmented from "components/Segmented";
-import { featureSwitch } from "constants/featureSwitch";
-import { ScrollBar, Search } from "lowcoder-design";
-import { useState } from "react";
-import styled from "styled-components";
-import { RightContext } from "./rightContext";
-import { UICompPanel } from "./uiCompPanel";
-import { trans } from "i18n";
-import ExtensionPanel from "./ExtensionPanel";
+import Segmented from "components/Segmented"
+import { featureSwitch } from "constants/featureSwitch"
+import { ScrollBar, Search } from "lowcoder-design"
+import { useState } from "react"
+import styled from "styled-components"
+import { RightContext } from "./rightContext"
+import { UICompPanel } from "./uiCompPanel"
+import { trans } from "i18n"
+import ExtensionPanel from "./ExtensionPanel"
 
-type OptionValue = "ui" | "extension";
+type OptionValue = "ui" | "extension"
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-`;
+`
 
 const InsertViewBody = styled.div`
   flex: 1;
   overflow: hidden;
-`;
+`
 
 const InsertViewHeader = styled.div`
   padding: 0 16px;
@@ -27,7 +27,7 @@ const InsertViewHeader = styled.div`
   .comp-panel-tab {
     margin-top: 16px;
   }
-`;
+`
 
 const options = [
   {
@@ -38,16 +38,16 @@ const options = [
     value: "extension",
     label: trans("rightPanel.extensionTab"),
   },
-];
+]
 
 interface InsertViewProps {
-  onCompDrag: (dragCompKey: string) => void;
+  onCompDrag: (dragCompKey: string) => void
 }
 
 export default function InsertView(props: InsertViewProps) {
-  const { onCompDrag } = props;
-  const [searchValue, setSearchValue] = useState("");
-  const [activeKey, setActiveKey] = useState<OptionValue>("ui");
+  const { onCompDrag } = props
+  const [searchValue, setSearchValue] = useState("")
+  const [activeKey, setActiveKey] = useState<OptionValue>("ui")
 
   return (
     <Wrapper>
@@ -82,5 +82,5 @@ export default function InsertView(props: InsertViewProps) {
         </InsertViewBody>
       </RightContext.Provider>
     </Wrapper>
-  );
+  )
 }

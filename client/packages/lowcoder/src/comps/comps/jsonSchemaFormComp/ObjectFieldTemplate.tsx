@@ -11,7 +11,6 @@ import { ConfigConsumer } from "antd/es/config-provider/context";
 import { useContainerWidth } from "./jsonSchemaFormComp";
 import styled from "styled-components";
 import TabPane from "antd/es/tabs/TabPane";
-import { is } from "core-js/core/object";
 
 const DESCRIPTION_COL_STYLE = {
   paddingBottom: '8px',

@@ -20,6 +20,18 @@
     "baseUrl": "./src",
     "noImplicitReturns": false,
     "strictNullChecks": false,
+
+
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "moduleDetection": "force",
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": false,
+
+
+
+    "downlevelIteration": true,
   },
   "include": ["src"]
 }

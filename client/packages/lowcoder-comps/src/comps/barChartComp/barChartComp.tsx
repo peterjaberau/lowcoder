@@ -52,7 +52,7 @@ let BarChartTmpComp = (function () {
     .build();
 })();
 
-BarChartTmpComp = withViewFn(BarChartTmpComp, (comp) => {
+BarChartTmpComp = withViewFn(BarChartTmpComp, (comp: any) => {
   const mode = comp.children.mode.getView();
   const onUIEvent = comp.children.onUIEvent.getView();
   const onEvent = comp.children.onEvent.getView();
@@ -60,7 +60,7 @@ BarChartTmpComp = withViewFn(BarChartTmpComp, (comp) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [chartSize, setChartSize] = useState<ChartSize>();
   const firstResize = useRef(true);
-  const theme = useContext(ThemeContext);
+  const theme: any = useContext(ThemeContext);
   const defaultChartTheme = {
     color: chartColorPalette,
     backgroundColor: "#fff",
@@ -73,7 +73,7 @@ BarChartTmpComp = withViewFn(BarChartTmpComp, (comp) => {
     log.error('theme chart error: ', error);
   }
 
-  const triggerClickEvent = async (dispatch: any, action: CompAction<JSONValue>) => {
+  const triggerClickEvent = async (dispatch: any, action: CompAction<any>) => {
     await getPromiseAfterDispatch(
       dispatch,
       action,
@@ -121,7 +121,7 @@ BarChartTmpComp = withViewFn(BarChartTmpComp, (comp) => {
           data: getSelectedPoints(param, option)
         }
       }));
-      
+
       if (param.fromAction === "select") {
         comp.dispatch(changeChildAction("selectedPoints", getSelectedPoints(param, option), false));
         onUIEvent("select");
@@ -146,7 +146,7 @@ BarChartTmpComp = withViewFn(BarChartTmpComp, (comp) => {
   const childrenProps = childrenToProps(echartsConfigChildren);
   const option = useMemo(() => {
     return getEchartsConfig(
-      childrenProps as ToViewReturn<typeof echartsConfigChildren>,
+      childrenProps as any,
       chartSize,
       themeConfig
     );
@@ -189,7 +189,7 @@ BarChartTmpComp = withViewFn(BarChartTmpComp, (comp) => {
 });
 
 function getYAxisFormatContextValue(
-  data: Array<JSONObject>,
+  data: Array<any>,
   yAxisType: EchartsAxisType,
   yAxisName?: string
 ) {
@@ -207,14 +207,14 @@ function getYAxisFormatContextValue(
 }
 
 BarChartTmpComp = class extends BarChartTmpComp {
-  private lastYAxisFormatContextVal?: JSONValue;
-  private lastColorContext?: JSONObject;
+  private lastYAxisFormatContextVal?: any;
+  private lastColorContext?: any;
 
   updateContext(comp: this) {
     // the context value of axis format
     let resultComp = comp;
     const data = comp.children.data.getView();
-    const sampleSeries = comp.children.series.getView().find((s) => !s.getView().hide);
+    const sampleSeries = comp.children.series.getView().find((s: any) => !s.getView().hide);
     const yAxisContextValue = getYAxisFormatContextValue(
       data,
       comp.children.yConfig.children.yAxisType.getView(),
@@ -255,6 +255,7 @@ BarChartTmpComp = class extends BarChartTmpComp {
     return resultComp;
   }
 
+  // @ts-ignore
   override reduce(action: CompAction): this {
     const comp = super.reduce(action);
     if (action.type === CompActionTypes.UPDATE_NODES_V2) {
@@ -265,6 +266,7 @@ BarChartTmpComp = class extends BarChartTmpComp {
           // update x-axis value
           const keys = getDataKeys(newData);
           if (keys.length > 0 && !keys.includes(comp.children.xAxisKey.getView())) {
+            // @ts-ignore
             comp.children.xAxisKey.dispatch(changeValueAction(keys[0] || ""));
           }
           // pass to child series comp
@@ -276,6 +278,7 @@ BarChartTmpComp = class extends BarChartTmpComp {
     return comp;
   }
 
+  // @ts-ignore
   override autoHeight(): boolean {
     return false;
   }
@@ -286,7 +289,7 @@ let BarChartComp = withExposingConfigs(BarChartTmpComp, [
     name: "selectedPoints",
     desc: trans("chart.selectedPointsDesc"),
     depKeys: ["selectedPoints"],
-    func: (input) => {
+    func: (input: any) => {
       return input.selectedPoints;
     },
   }),
@@ -294,7 +297,7 @@ let BarChartComp = withExposingConfigs(BarChartTmpComp, [
     name: "lastInteractionData",
     desc: trans("chart.lastInteractionDataDesc"),
     depKeys: ["lastInteractionData"],
-    func: (input) => {
+    func: (input: any) => {
       return input.lastInteractionData;
     },
   }),
@@ -302,7 +305,7 @@ let BarChartComp = withExposingConfigs(BarChartTmpComp, [
     name: "data",
     desc: trans("chart.dataDesc"),
     depKeys: ["data", "mode"],
-    func: (input) =>[] ,
+    func: (input: any) =>[] ,
   }),
   new NameConfig("title", trans("chart.titleDesc")),
 ]);

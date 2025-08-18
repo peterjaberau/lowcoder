@@ -14,6 +14,7 @@ import { buildVars } from "./src/dev-utils/buildVars";
 import { globalDepPlugin } from "./src/dev-utils/globalDepPlguin";
 import { terser } from 'rollup-plugin-terser';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import { codeInspectorPlugin } from 'code-inspector-plugin';
 
 dotenv.config();
 
@@ -76,10 +77,10 @@ export const viteConfig: UserConfig = {
     emptyOutDir: false,
     rollupOptions: {
       treeshake: {
-        moduleSideEffects: true, 
+        moduleSideEffects: true,
         propertyReadSideEffects: false,
-        tryCatchDeoptimization: false, 
-        unknownGlobalSideEffects: false, 
+        tryCatchDeoptimization: false,
+        unknownGlobalSideEffects: false,
       },
       output: {
         inlineDynamicImports: false,
@@ -94,7 +95,7 @@ export const viteConfig: UserConfig = {
 
             // 🔹 BARCODE & QR CODE PROCESSING
             if (id.includes("react-qr-barcode-scanner")) return "barcode";
-        
+
             // TEXT EDITORS & PARSERS
             if (id.includes("codemirror")) return "codemirror";
             if (id.includes("quill")) return "quill";
@@ -103,22 +104,22 @@ export const viteConfig: UserConfig = {
             if (id.includes("remark-gfm")) return "remark-gfm";
             if (id.includes("rehype-raw")) return "rehype-raw";
             if (id.includes("rehype-sanitize")) return "rehype-sanitize";
-        
+
             // DRAG & DROP
             if (id.includes("@dnd-kit")) return "dnd-kit";
             if (id.includes("react-draggable")) return "react-draggable";
             if (id.includes("react-grid-layout")) return "react-grid-layout";
             if (id.includes("react-sortable-hoc")) return "react-sortable-hoc";
-        
+
             // ICONS & FONTS
             if (id.includes("@fortawesome")) return "fontawesome";
             if (id.includes("@remixicon")) return "remixicon";
-        
+
             // DATE/TIME HANDLING
             if (id.includes("moment")) return "moment";
             if (id.includes("date-fns")) return "date-fns";
             if (id.includes("dayjs")) return "dayjs";
-        
+
             // UTILITIES & HELPERS
             if (id.includes("clsx")) return "clsx";
             if (id.includes("immer")) return "immer";
@@ -128,7 +129,7 @@ export const viteConfig: UserConfig = {
             if (id.includes("ua-parser-js")) return "ua-parser-js";
             if (id.includes("html2canvas")) return "ua-parser-js";
             if (id.includes("numbro")) return "numbro";
-        
+
             // FILE & DATA PROCESSING
             if (id.includes("buffer")) return "buffer";
             if (id.includes("file-saver")) return "file-saver";
@@ -137,21 +138,21 @@ export const viteConfig: UserConfig = {
             if (id.includes("xlsx")) return "xlsx";
             if (id.includes("alasql")) return "alasql";
             if (id.includes("sql-formatter")) return "sql-formatter";
-        
+
             // NETWORK & HTTP
             if (id.includes("axios")) return "axios";
             if (id.includes("fetch")) return "fetch";
             if (id.includes("http")) return "http-modules";
             if (id.includes("https")) return "https-modules";
-        
+
             // WEB SOCKETS & STREAMING
             if (id.includes("sockjs")) return "websockets";
             if (id.includes("websocket")) return "websockets";
-        
+
             // STATE MANAGEMENT
             if (id.includes("react-error-boundary")) return "react-error-boundary";
             if (id.includes("redux-devtools-extension")) return "redux-devtools";
-        
+
             // POLYFILLS & BROWSER COMPATIBILITY
             // if (id.includes("core-js")) return "core-js";
             if (id.includes("regenerator-runtime")) return "regenerator-runtime";
@@ -176,11 +177,12 @@ export const viteConfig: UserConfig = {
         },
       },
       plugins: [
+        // @ts-ignore
         terser({
           compress: {
-            drop_console: true,  
-            drop_debugger: true, 
-            pure_funcs: ["console.info", "console.debug", "console.log"], 
+            drop_console: true,
+            drop_debugger: true,
+            pure_funcs: ["console.info", "console.debug", "console.log"],
           },
           format: {
             comments: /(@vite-ignore|webpackIgnore)/
@@ -234,15 +236,21 @@ export const viteConfig: UserConfig = {
     host: "0.0.0.0",
     proxy: proxyConfig,
   },
+  // @ts-ignore
   plugins: [
+    codeInspectorPlugin({
+      bundler: 'vite',
+      editor: 'idea',
+      showSwitch: true
+    }),
     checker({
       typescript: true,
-      eslint: {
-        lintCommand: 'eslint --quiet "./src/**/*.{ts,tsx}"',
-        dev: {
-          logLevel: ["error"],
-        },
-      },
+      // eslint: {
+      //   lintCommand: 'eslint --quiet "./src/**/*.{ts,tsx}"',
+      //   dev: {
+      //     logLevel: ["error"],
+      //   },
+      // },
     }),
     react({
       babel: {

@@ -22,14 +22,14 @@ type ParamTypeToValueType<T extends DataSourceParamType | ActionParamType> = T e
   | "file"
   ? string
   : T extends "keyValueInput"
-  ? { key: string; value: any }[]
-  : T extends "numberInput"
-  ? number
-  : T extends "jsonInput"
-  ? any
-  : T extends "checkbox" | "booleanInput" | "switch"
-  ? boolean
-  : never;
+    ? { key: string; value: any }[]
+    : T extends "numberInput"
+      ? number
+      : T extends "jsonInput"
+        ? any
+        : T extends "checkbox" | "booleanInput" | "switch"
+          ? boolean
+          : never;
 
 interface CommonParamConfig<T extends DataSourceParamType | ActionParamType> {
   type: T;
@@ -79,18 +79,18 @@ interface ActionSelectParamConfig extends ActionCommonParamConfig<"select"> {
 }
 
 type KeyedConfigToDataType<X extends KeyedParamConfig> = X extends KeyedParamConfig<
-  infer C,
-  infer K
->
+    infer C,
+    infer K
+  >
   ? {
-      [key in K]: ConfigToType<C>;
-    }
+    [key in K]: ConfigToType<C>;
+  }
   : never;
 
 type ActionConfigToDataType<X extends ActionConfig> = X extends ActionConfig<infer C, infer K>
   ? ConfigToType<C> & {
-      actionName: K;
-    }
+  actionName: K;
+}
   : never;
 
 export type ActionCategoryValue = string | string[];
@@ -219,27 +219,27 @@ export type MixedConfig = Config | DynamicConfig;
 export type ConfigToType<T extends Config> = T extends StringParamConfig
   ? string
   : T extends NumberParamConfig
-  ? number
-  : T extends BooleanParamConfig
-  ? boolean
-  : T extends JsonParamConfig
-  ? any
-  : T extends RecordParamConfig
-  ? { key: string; value: any }[]
-  : T extends BooleanParamConfig
-  ? boolean
-  : T extends NonValueParamConfig
-  ? never
-  : T extends ArrayParamConfig
-  ? UnionToIntersection<KeyedConfigToDataType<T[number]>>
-  : T extends QueryConfig
-  ? ActionConfigToDataType<T["actions"][number]>
-  : T extends DataSourceConfig
-  ? {
-      extra?: any;
-      dynamicParamsConfig?: any;
-    } & ConfigToType<T["params"]>
-  : never;
+    ? number
+    : T extends BooleanParamConfig
+      ? boolean
+      : T extends JsonParamConfig
+        ? any
+        : T extends RecordParamConfig
+          ? { key: string; value: any }[]
+          : T extends BooleanParamConfig
+            ? boolean
+            : T extends NonValueParamConfig
+              ? never
+              : T extends ArrayParamConfig
+                ? UnionToIntersection<KeyedConfigToDataType<T[number]>>
+                : T extends QueryConfig
+                  ? ActionConfigToDataType<T["actions"][number]>
+                  : T extends DataSourceConfig
+                    ? {
+                    extra?: any;
+                    dynamicParamsConfig?: any;
+                  } & ConfigToType<T["params"]>
+                    : never;
 
 export interface ParamOption {
   value: string;
@@ -324,11 +324,11 @@ export interface DataSourcePluginMeta extends DataSourcePluginBasicInfo {
         authId?: string;
       } & (
         | {
-            username: string; // basic auth
-            password: string;
-          }
+        username: string; // basic auth
+        password: string;
+      }
         | OAuthConfig
-      );
+        );
       sslConfig?: SSLConfig;
       headers: KeyValue;
     }

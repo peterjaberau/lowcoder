@@ -20,7 +20,7 @@
     "prepare": "yarn workspace lowcoder prepare",
     "build:core": "yarn workspace lowcoder-core build",
     "test:core": "yarn workspace lowcoder-core test",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix --cache"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
@@ -57,7 +57,7 @@
     "shelljs": "^0.8.5",
     "svgo": "^3.0.0",
     "ts-node": "^10.4.0",
-    "typescript": "^5",
+    "typescript": "5.8.3",
     "whatwg-fetch": "^3.6.2"
   },
   "lint-staged": {
@@ -69,8 +69,7 @@
     "@types/react": "^18",
     "moment": "2.29.2",
     "canvas": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.2.1.tgz",
-    "react-virtualized@^9.22.3": "patch:react-virtualized@npm%3A9.22.3#./.yarn/patches/react-virtualized-npm-9.22.3-0fff3cbf64.patch",
-    "eslint-plugin-only-ascii@^0.0.0": "patch:eslint-plugin-only-ascii@npm%3A0.0.0#./.yarn/patches/eslint-plugin-only-ascii-npm-0.0.0-29e3417685.patch"
+    "react-virtualized@^9.22.3": "patch:react-virtualized@npm%3A9.22.3#./.yarn/patches/react-virtualized-npm-9.22.3-0fff3cbf64.patch"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.24.0",
@@ -90,6 +89,7 @@
     "@formily/shared": "^2.3.7",
     "@formily/validator": "^2.3.7",
     "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@radix-ui/react-scroll-area": "^1.2.10",
     "@remixicon/react": "^4.1.1",
     "@statelyai/inspect": "^0.4.0",
     "@supabase/supabase-js": "^2.45.4",
@@ -108,6 +108,7 @@
     "number-precision": "^1.6.0",
     "react-countup": "^6.5.3",
     "react-github-btn": "^1.4.0",
+    "react-icons": "^5.5.0",
     "react-player": "^2.11.0",
     "react18-json-view": "^0.2.9",
     "resize-observer-polyfill": "^1.5.1",

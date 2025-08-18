@@ -1,15 +1,14 @@
-import { RightPanelWrapper } from "pages/common/styledComponent";
 import { Tabs } from "lowcoder-design";
 import PropertyView from "./PropertyView";
 import InsertView from "./InsertView";
 import type UIComp from "comps/comps/uiComp";
 import type { UiLayoutType } from "comps/comps/uiComp";
 import { useEffect, useState } from "react";
-import { AttributeIcon } from "lowcoder-design";
-import { InsertIcon } from "lowcoder-design";
+import { LuSquarePlus, LuPencilRuler } from "react-icons/lu";
 import { trans } from "i18n";
 import { isAggregationApp } from "util/appUtils";
 import React from "react";
+import { Stack } from "@chakra-ui/react"
 
 type RightPanelProps = {
   onTabChange: (key: string) => void;
@@ -27,7 +26,7 @@ function RightPanel(props: RightPanelProps) {
     {
       key: "property",
       title: trans("rightPanel.propertyTab"),
-      icon: <AttributeIcon />,
+      icon: <LuPencilRuler />,
       content: <PropertyView uiComp={uiComp} />,
     },
   ];
@@ -35,7 +34,7 @@ function RightPanel(props: RightPanelProps) {
     tabConfigs.push({
       key: "insert",
       title: trans("rightPanel.createTab"),
-      icon: <InsertIcon />,
+      icon: <LuSquarePlus />,
       content: <InsertView onCompDrag={props.onCompDrag} />,
     });
   }
@@ -45,15 +44,30 @@ function RightPanel(props: RightPanelProps) {
   }, [showPropertyPane, aggregationApp, activeKey]);
 
   return (
-    <RightPanelWrapper className="cypress-right-content">
-      <Tabs
-        onChange={(key) => {
-          onTabChange(key);
-        }}
-        tabsConfig={tabConfigs}
-        activeKey={activeKey}
-      />
-    </RightPanelWrapper>
+    <Stack
+      data-id="editor-right-panel"
+      css={{
+        w: "313px",
+        h: "100%",
+        boxSizing: "border-box",
+        borderLeft: "1px solid",
+        borderLeftColor: "border.emphasized",
+        overflow: "hidden",
+        zIndex: 500,
+        bg: "bg.panel"
+      }}
+    >
+      <>
+        <Tabs
+          onChange={(key) => {
+            onTabChange(key);
+          }}
+          tabsConfig={tabConfigs}
+          activeKey={activeKey}
+        />
+
+      </>
+    </Stack>
   );
 }
 

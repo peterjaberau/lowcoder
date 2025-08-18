@@ -1,16 +1,28 @@
 {
-  "extends": ["react-app"],
-  "plugins": ["only-ascii"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [],
+  "env": {
+    "node": true
+  },
+  "linterOptions": {
+    "reportUnusedDisableDirectives": "error"
+  },
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "coverage",
+    ".next",
+    "build",
+    "plop-templates",
+    "**/*.d.ts"
+  ],
   "rules": {
-    // "react-hooks/exhaustive-deps": "off"
-    //"only-ascii/only-ascii": "error"
-
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
-    "no-unused-vars": "off",
     "no-param-reassign": "off",
     "prefer-spread": "off",
     "no-console": "off",
@@ -28,6 +40,7 @@
     "consistent-return": "off",
     "no-restricted-syntax": "off",
     "no-continue": "off",
+    "eqeqeq": "off",
     "@typescript-eslint/dot-notation": "off",
     "no-bitwise": "off",
     "no-redeclare": "off",
@@ -41,7 +54,22 @@
     "arrow-body-style": "off",
     "import/namespace": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
     "default-case": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}", "**/*.{js,jsx}"],
+      "parserOptions": {
+        "project": "tsconfig.eslint.json"
+      }
+    }
+  ]
 }
