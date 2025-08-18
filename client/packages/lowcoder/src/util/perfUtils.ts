@@ -93,7 +93,7 @@ export function showCost<T>(logstr: string, fn: () => T): T {
   if (!SHOW_COST_INFO) {
     return fn();
   }
-  const startTime = performance.now();
+  // const startTime: any = performance.now();
   const result = fn();
   // console.info(`${logstr} cost: ${performance.now() - startTime}`);
   return result;

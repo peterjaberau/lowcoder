@@ -93,7 +93,7 @@ const StatusDot = styled.span<{ active: boolean }>`
   background-color: ${(props) => (props.active ? "green" : "gray")};
 `;
 
-const toolbarOptions = [
+const toolbarOptions: any = [
   ['bold', 'italic', 'underline'], // Basic formatting options
   [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
   [{ 'header': [1, 2, 3, false] }], // Headers
@@ -160,14 +160,14 @@ export function SupportOverview() {
       const errorDetails = `Error: ${message} at ${source}:${lineno}:${colno}, Stack: ${error?.stack || 'N/A'}`;
       setCapturedErrors((prevErrors) => [...prevErrors, errorDetails]);
     };
-  
+
     window.addEventListener("error", handleGlobalError);
-  
+
     return () => {
       window.removeEventListener("error", handleGlobalError);
     };
   }, []);
-  
+
 
   // Function to fetch support tickets
   const fetchSupportTickets = async () => {
@@ -219,7 +219,7 @@ export function SupportOverview() {
       return;
     }
 
-    setIsSubmitting(true); 
+    setIsSubmitting(true);
     try {
       const result = await createTicket(domain, deploymentId, orgID, orgName, currentUser.id, SupportSubscription[0]?.id, summary, description, capturedErrors.join("\n"));
       if (result) {
@@ -232,7 +232,7 @@ export function SupportOverview() {
     } catch (error) {
       console.error("Error creating support ticket: ", error);
     } finally {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
 
@@ -348,8 +348,8 @@ export function SupportOverview() {
                   width: "192px",
                   render: (assignee: any) => (
                     <SubColumnCell>
-                      <Tooltip title={"Support Member is active in: " + 
-                          assignee.timeZone + ", " + 
+                      <Tooltip title={"Support Member is active in: " +
+                          assignee.timeZone + ", " +
                           (assignee.email || trans("support.noEmail"))
                         }>
                         <Avatar src={assignee.avatar} alt={assignee.email} />

@@ -5,5 +5,5 @@ export function usePermissionMenuItems(orgId: string) {
     nameSuffixFunc: (group?: OrgGroup) => <></>,
     menuItemsFunc: undefined as Function | undefined,
     menuExtraView: undefined,
-  };
+  } as any;
 }

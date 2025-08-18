@@ -36,7 +36,7 @@ const DataResponderItemCompBase = new MultiCompBuilder(
     onEvent: eventHandlerControl([dataChangeEvent], "query"),
     data: JSONValueControl,
   },
-  () => null
+  () => null as any
 )
   .setPropertyViewFn((children) => {
     return (
@@ -79,9 +79,9 @@ const DataResponderItemCompBase = new MultiCompBuilder(
                 modalWidth="80%"
                 modalTop="20px"
               />
-              
+
               </></>
-              
+
             ),
           },
         ]}

@@ -34,13 +34,13 @@ export function useHighlightJsExtension(
   codeType: CodeType,
   segments?: { value: string; success: boolean }[]
 ) {
-  const isFunction = codeType === "Function";
+  const isFunction: any = codeType === "Function";
   const ref = useRef(segments);
   ref.current = segments;
   return useMemo(
     () =>
       isFunction
-        ? []
+        ? [] as any
         : ViewPlugin.fromClass(
             class {
               decoration: DecorationSet;
@@ -54,7 +54,7 @@ export function useHighlightJsExtension(
             {
               decorations: (v) => v.decoration,
             }
-          ),
+          ) as any,
     [isFunction]
-  );
+  ) as any;
 }

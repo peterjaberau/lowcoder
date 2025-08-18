@@ -1,3 +1,4 @@
+import { Provider as ChakraProvider } from './provider'
 import { default as App } from "antd/es/app";
 import { default as ConfigProvider } from "antd/es/config-provider";
 import {
@@ -50,7 +51,7 @@ import { loadComps } from "comps";
 import { initApp } from "util/commonUtils";
 import { favicon } from "assets/images";
 import { hasQueryParam } from "util/urlUtils";
-import { getUser, isFetchUserFinished } from "redux/selectors/usersSelectors"; // getCurrentUser, 
+import { getUser, isFetchUserFinished } from "redux/selectors/usersSelectors"; // getCurrentUser,
 import { getIsCommonSettingFetched } from "redux/selectors/commonSettingSelectors";
 import { SystemWarning } from "./components/SystemWarning";
 import { getBrandingConfig, getDeploymentId } from "./redux/selectors/configSelectors";
@@ -84,7 +85,7 @@ const Wrapper = React.memo((props: {
   const deploymentId = useSelector(getDeploymentId);
   const user = useSelector(getUser);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     if (user.currentOrgId) {
       dispatch(fetchDeploymentIdAction());
@@ -96,7 +97,7 @@ const Wrapper = React.memo((props: {
       dispatch(fetchSubscriptionsAction())
     }
   }, [deploymentId]);
-  
+
   const theme = useMemo(() => {
     return {
       hashed: false,
@@ -113,16 +114,18 @@ const Wrapper = React.memo((props: {
   }, [props.fontFamily]);
 
   return (
-    <ConfigProvider
-      theme={theme}
-      wave={{ disabled: true }}
-      locale={getAntdLocale(props.language)}
-    >
-      <App>
-        <GlobalInstances />
-        {props.children}
-      </App>
-    </ConfigProvider>
+    <ChakraProvider>
+      <ConfigProvider
+        theme={theme}
+        wave={{ disabled: true }}
+        locale={getAntdLocale(props.language)}
+      >
+        <App>
+          <GlobalInstances />
+          {props.children}
+        </App>
+      </ConfigProvider>
+    </ChakraProvider>
   );
 });
 
@@ -459,7 +462,7 @@ class AppIndex extends React.Component<AppIndexProps, any> {
               />
 
               {this.props.isFetchUserFinished && this.props.defaultHomePage? (
-                !this.props.orgDev ? ( 
+                !this.props.orgDev ? (
                   <Redirect exact from={BASE_URL} to={APPLICATION_VIEW_URL(this.props.defaultHomePage || "", "view")}/>
                 ) : (
                   <Redirect exact from={BASE_URL} to={ORG_HOME_URL} />

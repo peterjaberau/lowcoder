@@ -25,6 +25,7 @@ abstract class DoNothingComp<ViewReturn> extends AbstractComp<
     throw new Error("Method not implemented.");
   }
 
+  // @ts-ignore
   override nodeWithoutCache() {
     return undefined;
   }

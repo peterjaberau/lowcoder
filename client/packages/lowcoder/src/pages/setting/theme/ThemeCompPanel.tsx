@@ -126,7 +126,7 @@ export const ThemeCompPanel = (props: any) => {
 
   const categories = useMemo(() => {
     const cats: Record<string, [string, UICompManifest][]> = Object.fromEntries(
-      Object.keys(uiCompCategoryNames).map((cat) => [cat, []])
+      Object.keys(uiCompCategoryNames).map((cat) => [cat, []] as any)
     );
     Object.entries(uiCompRegistry).forEach(([name, manifest]) => {
       manifest.categories.forEach((cat) => {
@@ -170,7 +170,7 @@ export const ThemeCompPanel = (props: any) => {
     setStyleChildrens(undefined);
 
     setTimeout(async () => {
-      
+
       const [compType, compInfo] = compMap;
       setSelectedComp(compType);
       const compKey = genRandomKey();
@@ -183,7 +183,7 @@ export const ThemeCompPanel = (props: any) => {
           defaultDataFnName,
           defaultDataFnPath,
         } = compInfo;
-    
+
         if(defaultDataFnName && defaultDataFnPath) {
           const module = await import(`../../../comps/${defaultDataFnPath}.tsx`);
           defaultDataFn = module[defaultDataFnName];
@@ -204,13 +204,15 @@ export const ThemeCompPanel = (props: any) => {
       }
 
       if (newComp) {
-        const compChildrens = newComp.children;
-        let styleChildrenKeys = Object.keys(compChildrens).filter(child => child.toLowerCase().endsWith('style' || 'styles'));
+        const compChildrens: any = newComp.children;
+        // @ts-ignore
+        let styleChildrenKeys = Object.keys(compChildrens).filter((child: any) => child.toLowerCase().endsWith('style' || 'styles'));
         let styleChildrens: Record<string, any> = {};
         styleChildrenKeys.forEach((childKey: string) => {
           styleChildrens[childKey] = compChildrens[childKey];
         })
         if (compChildrens.container) {
+          // @ts-ignore
           styleChildrenKeys = Object.keys(compChildrens.container.children).filter(child => child.toLowerCase().endsWith('style' || 'styles'));
           styleChildrenKeys.forEach((childKey: string) => {
             styleChildrens[childKey] = compChildrens.container.children[childKey];
@@ -218,7 +220,7 @@ export const ThemeCompPanel = (props: any) => {
         }
         setStyleChildrens(styleChildrens);
       }
-  
+
       const ui = {
         items: {
           [compKey]: {
@@ -262,7 +264,7 @@ export const ThemeCompPanel = (props: any) => {
 
           return (
             <SectionWrapper key={index}>
-              <BaseSection 
+              <BaseSection
                 style={{ whiteSpace: "normal", overflow: "hidden"}}
                 noMargin
                 width={210}

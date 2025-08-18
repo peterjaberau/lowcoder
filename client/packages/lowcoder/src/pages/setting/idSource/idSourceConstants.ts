@@ -40,7 +40,7 @@ const AuthCategories = Object.keys(AuthCategoriesEnum).map(
 
 const GenericProviderCategories = [{label: "Generic OAuth Provider", value: "GENERIC"}];
 
-export const validatorOptions = [];
+export const validatorOptions: any = [];
 
 export const clientIdandSecretConfig = {
   clientId: "Client ID",

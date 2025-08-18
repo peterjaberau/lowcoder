@@ -66,7 +66,7 @@ export function AppUsageDashboard() {
   const currentUser = useSelector(getUser);
   const location = useLocation();
 
-  const [allLogs, setAllLogs] = useState<AppLog[]>([]); 
+  const [allLogs, setAllLogs] = useState<AppLog[]>([]);
   const [currentPageLogs, setCurrentPageLogs] = useState<AppLog[]>([]);
   const [dataMap, setDataMap] = useState<Record<string, any>>({});
 
@@ -80,7 +80,7 @@ export function AppUsageDashboard() {
   const getQueryParams = () => {
     const params = new URLSearchParams(location.search);
     let queryObject: Record<string, any> = {};
-  
+
     // Convert search params into a JavaScript object
     params.forEach((value, key) => {
       if (key !== 'fromTimestamp' && key !== 'toTimestamp') {
@@ -96,11 +96,11 @@ export function AppUsageDashboard() {
     if (params.get('toTimestamp')) {
       dateRange[1] = dayjs(params.get('toTimestamp'));
     }
-    
+
     queryObject['dateRange'] = dateRange;
     return queryObject;
   };
-  
+
   useEffect(() => {
     form.setFieldsValue(getQueryParams());
   }, []);
@@ -121,7 +121,7 @@ export function AppUsageDashboard() {
   // Fetch Logs with all form values if set
   const fetchLogs = async (newPage: number, resetData: boolean = false) => {
     const formValues = form.getFieldsValue();
-  
+
     const cleanedParams = Object.fromEntries(
       Object.entries({
         ...formValues,
@@ -137,14 +137,14 @@ export function AppUsageDashboard() {
     setLoading(true);
     try {
       const data = await getAppUsageLogs(cleanedParams);
-  
+
       if (resetData) {
         setAllLogs(data.data || []);
         setPagination({ pageSize: 25, current: 1 }); // Reset pagination
       } else {
         setAllLogs((prevLogs) => [...prevLogs, ...(data?.data || [])]);
       }
-  
+
       setTotal(data.totalCount);
     } catch (error) {
       message.error("Failed to fetch audit logs.");
@@ -156,7 +156,7 @@ export function AppUsageDashboard() {
   // Handle chart zoom
   const handleChartZoom = ({ fromTimestamp, toTimestamp }: { fromTimestamp: string; toTimestamp: string }) => {
     console.log("Zoom applied:", fromTimestamp, toTimestamp);
-  
+
     const startDate = dayjs(fromTimestamp);
     const endDate = dayjs(toTimestamp);
     form.setFieldsValue({ dateRange: [startDate, endDate] });
@@ -166,27 +166,27 @@ export function AppUsageDashboard() {
     setCurrentPageLogs([]);
     fetchLogs(1, true);
   };
-  
+
   // Debounce handler for input fields
   const handleInputChange = useCallback(
     debounce(() => {
       setPagination({ pageSize: 25, current: 1 });
-      setAllLogs([]); 
-      setCurrentPageLogs([]); 
-      fetchLogs(1, true); 
+      setAllLogs([]);
+      setCurrentPageLogs([]);
+      fetchLogs(1, true);
     }, 300),
     []
   );
-  
+
   const handleClickFilter = (field: any, value: any) => {
     form.setFieldsValue({ [field]: value });
-    
+
     setPagination({ pageSize: 25, current: 1 });
     setAllLogs([]);
     setCurrentPageLogs([]);
     fetchLogs(1, true);
   };
-  
+
   const handleDateChange = (dates: any) => {
     if (dates?.[0] && dates?.[1]) {
       form.setFieldsValue({
@@ -196,16 +196,16 @@ export function AppUsageDashboard() {
     } else {
       form.resetFields(["fromTimestamp", "toTimestamp"]);
     }
-  
+
     // Reset pagination and clear logs BEFORE calling fetchLogs
     setPagination({ pageSize: 25, current: 1 });
     setAllLogs([]);
     setCurrentPageLogs([]);
-  
+
     // Ensure fetchLogs is called only ONCE
     fetchLogs(1, true);
   };
-  
+
   // Handle page change
   const handleTableChange: TableProps<any>["onChange"] = (newPagination) => {
     const newPage = newPagination.current ?? 1;
@@ -230,7 +230,7 @@ export function AppUsageDashboard() {
 
     setPagination({ pageSize, current: newPage });
   };
-  
+
   useEffect(() => {
     if (allLogs.length > 0) {
       const startIndex = (pagination.current - 1) * pagination.pageSize;
@@ -240,14 +240,14 @@ export function AppUsageDashboard() {
       setCurrentPageLogs(allLogs.slice(startIndex, endIndex));
     }
   }, [pagination, allLogs]);
-  
-  
+
+
   // Initial Fetch on Mount
   useEffect(() => {
     fetchLogs(1);
   }, [currentUser.currentOrgId]);
 
-  const appViews = useMemo(() => {
+  const appViews: any = useMemo(() => {
     if (!allLogs?.length) return [];
 
     return allLogs.reduce((acc, e) => {
@@ -259,7 +259,7 @@ export function AppUsageDashboard() {
       const applicationAuthorOrgId = e.applicationAuthorOrgId;
       acc[appId] = acc[appId] || { appId, name, orgId, environmentId, applicationAuthor, applicationAuthorOrgId, count: 0 };
       acc[appId].count++;
-      return acc;
+      return acc as any;
     }, {} as Record<string, {
       appId: string, name: string,
       orgId: string,
@@ -267,14 +267,14 @@ export function AppUsageDashboard() {
       applicationAuthor?: string,
       applicationAuthorOrgId?: string,
       count: number
-    }>);
+    }> | any);
   }, [allLogs]);
-  
+
   const topApps = useMemo(() => {
     if (!Object.keys(appViews)?.length) return [];
 
     return Object.values(appViews)
-    .sort((a, b) => b.count - a.count)
+    .sort((a: any, b: any) => b.count - a.count)
     .slice(0, 10);
   }, [appViews]);
 
@@ -283,8 +283,8 @@ export function AppUsageDashboard() {
       return setDataMap({});
     }
 
-    const uniqueOrgIds: string[] = uniqBy(topApps, 'orgId').map(item => item.orgId);
-    const uniqueEnvIds: string[] = uniqBy(topApps, 'environmentId').map(item => item.environmentId);
+    const uniqueOrgIds: string[] = uniqBy(topApps, 'orgId').map((item: any) => item.orgId);
+    const uniqueEnvIds: string[] = uniqBy(topApps, 'environmentId').map((item: any) => item.environmentId);
 
     const metaResponse = await getMeta({
       orgIds: uniqueOrgIds,
@@ -413,9 +413,9 @@ export function AppUsageDashboard() {
               <Flex gap="middle" vertical>
                 <Flex>
                   <Form.Item name="dateRange">
-                    <RangePicker 
-                      showTime 
-                      format="YYYY-MM-DD 00:00:00" 
+                    <RangePicker
+                      showTime
+                      format="YYYY-MM-DD 00:00:00"
                       value={form.getFieldValue("dateRange")}/>
                   </Form.Item>
                   {/* <Form.Item name="eventType">
@@ -428,7 +428,7 @@ export function AppUsageDashboard() {
                     />
                   </Form.Item> */}
                 </Flex>
-                
+
                 <Flex>
                   <Form.Item name="environmentId">
                     <Input placeholder="Environment ID" allowClear />
@@ -443,7 +443,7 @@ export function AppUsageDashboard() {
                     <Input placeholder="App ID" allowClear />
                   </Form.Item>
                 </Flex>
-                
+
                 <Flex>
                   <Form.Item name="appAuthor">
                     <Input placeholder="App Author" allowClear />
@@ -481,9 +481,9 @@ export function AppUsageDashboard() {
               <Skeleton active paragraph={{ rows: 5 }} />
             ) : currentPageLogs.length > 0 ? (
               <>
-                <UserActivityByTimeChart 
-                  data={allLogs} 
-                  setDateRange={handleChartZoom} 
+                <UserActivityByTimeChart
+                  data={allLogs}
+                  setDateRange={handleChartZoom}
                 />
               </>
             ) : (
@@ -525,8 +525,8 @@ export function AppUsageDashboard() {
               <Skeleton active paragraph={{ rows: 5 }} />
             ) : currentPageLogs.length > 0 ? (
               <>
-                <UserAuthStatusChart 
-                  data={allLogs} 
+                <UserAuthStatusChart
+                  data={allLogs}
                 />
               </>
             ) : (
@@ -543,8 +543,8 @@ export function AppUsageDashboard() {
               <Skeleton active paragraph={{ rows: 5 }} />
             ) : currentPageLogs.length > 0 ? (
               <>
-                <DeviceOSBreakdownChart 
-                  data={allLogs} 
+                <DeviceOSBreakdownChart
+                  data={allLogs}
                 />
               </>
             ) : (
@@ -561,8 +561,8 @@ export function AppUsageDashboard() {
               <Skeleton active paragraph={{ rows: 5 }} />
             ) : currentPageLogs.length > 0 ? (
               <>
-                <BrowserEngineBreakdownChart 
-                  data={allLogs} 
+                <BrowserEngineBreakdownChart
+                  data={allLogs}
                 />
               </>
             ) : (

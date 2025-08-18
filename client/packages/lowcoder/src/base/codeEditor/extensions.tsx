@@ -461,7 +461,7 @@ function getLintExtension(
         return true;
       })
       .map((t) => {
-        return { ...t, source: undefined, actions: undefined };
+        return { ...t, source: null, actions: null } as any;
       });
   };
   return [linter(esLintSource, { markerFilter })];

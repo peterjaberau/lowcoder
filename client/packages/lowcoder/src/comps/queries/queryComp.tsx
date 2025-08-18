@@ -266,6 +266,7 @@ QueryCompTmp = class extends QueryCompTmp {
       ) // query which has deps can be executed on page load(first time)
     ) {
       const next = super.reduce(action);
+      // @ts-ignore
       const depends = this.children.comp.node()?.dependValues();
       const dsl = this.children.comp.toJsonValue();
       const lastDependsKey = "__query_comp_last_depends";
@@ -292,7 +293,7 @@ QueryCompTmp = class extends QueryCompTmp {
         setTimeout(() => {
           blockInputChangeQueries = false;
         }, 500)
-        
+
         return setFieldsNoTypeCheck(next, {
           [lastDependsKey]: depends,
           [lastDslKey]: dsl,
@@ -320,6 +321,7 @@ interface QueryViewProps {
   comp: InstanceType<typeof QueryCompTmp>;
 }
 
+// @ts-ignore
 function QueryView(props: QueryViewProps) {
   const { comp } = props;
 
@@ -699,7 +701,7 @@ class QueryListComp extends QueryListTmpComp implements BottomResListComp {
             getTriggerType(query) === 'onQueryExecution'
             && query.children.depQueryName.getView() === queryName
           ) {
-            return true; 
+            return true;
           }
         })
         dependentQueries?.forEach((query) => {

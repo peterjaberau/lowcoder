@@ -106,8 +106,8 @@ export const UICompPanel = () => {
   const [searchedPropertySectionState, setSearchedPropertySectionState] = useState<PropertySectionState>({});
 
   const categories = useMemo(() => {
-    const cats: Record<string, [string, UICompManifest][]> = Object.fromEntries(
-      Object.keys(uiCompCategoryNames).map((cat) => [cat, []])
+    const cats: Record<string, [string, UICompManifest][]> | any = Object.fromEntries(
+      Object.keys(uiCompCategoryNames).map((cat) => [cat, []] as any)
     );
     Object.entries(uiCompRegistry).forEach(([name, manifest]) => {
       manifest.categories.forEach((cat) => {
@@ -151,10 +151,10 @@ export const UICompPanel = () => {
       Object.entries(categories)
         // .filter(([key]) => !(!isEmpty(searchValue) && (key as UICompCategory) === "dashboards"))
         .map(([key, value], index) => {
-          let infos = value;
+          let infos: any = value;
           if (!isEmpty(searchValue)) {
-            const searchString = searchValue.trim().toLocaleLowerCase();
-            infos = infos.filter((info) =>
+            const searchString: any = searchValue.trim().toLocaleLowerCase();
+            infos = infos.filter((info: any) =>
               info[1].keywords.toLowerCase().includes(searchString.toLowerCase())
             );
           }
@@ -171,7 +171,7 @@ export const UICompPanel = () => {
                 name={uiCompCategoryNames[key as UICompCategory]}
               >
                 <InsertContain>
-                  {infos.map((info) => (
+                  {infos.map((info: any) => (
                     <CompDiv key={info[0]} className={info[0] === "table" ? tableDragClassName : ""}>
                       <HovDiv
                         draggable

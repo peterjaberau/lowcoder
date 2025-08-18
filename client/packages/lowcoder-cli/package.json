@@ -38,7 +38,7 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "devDependencies": {
-    "typescript": "^4.8.4"
+    "typescript": "^5"
   },
   "peerDependencies": {
     "lowcoder-sdk": "*"

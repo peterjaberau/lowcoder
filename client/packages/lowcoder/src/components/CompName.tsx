@@ -77,11 +77,11 @@ export const CompName = React.memo((props: Iprops) => {
   const [editing, setEditing] = useState(false);
   const [upgrading, setUpgrading] = useState(false);
   const [showSearch, setShowSearch] = useState<boolean>(false);
-  
+
   const editorState = useContext(EditorContext);
   const selectedComp = useMemo(() => values(editorState.selectedComps())[0], [editorState]);
   const compType = useMemo(() => selectedComp.children.compType.getView() as UICompType, [selectedComp]);
-  const compInfo = useMemo(() => parseCompType(compType), [compType]);
+  const compInfo : any = useMemo(() => parseCompType(compType), [compType]);
   const docUrl = useMemo(() => getComponentDocUrl(compType), [compType]);
   const playgroundUrl = useMemo(() => getComponentPlaygroundUrl(compType), [compType]);
 

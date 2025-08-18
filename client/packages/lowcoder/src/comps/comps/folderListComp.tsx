@@ -13,9 +13,9 @@ const FolderItemCompBase = new MultiCompBuilder(
     id: valueComp<string>(""),
     name: SimpleNameComp,
   },
-  () => null
+  () => null as any
 )
-  .setPropertyViewFn(() => null)
+  .setPropertyViewFn(() => null as any)
   .build();
 
 export class FolderListItemComp extends FolderItemCompBase implements BottomResComp {

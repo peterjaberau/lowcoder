@@ -257,7 +257,7 @@ export function resolveValue(files: UploadFile[]) {
         f.originFileObj
           ?.arrayBuffer()
           .then((a) => Buffer.from(a).toString("base64"))
-          .catch(() => null) ?? null
+          .catch(() => null as any) ?? null as any
     )
   );
 }
@@ -281,9 +281,9 @@ export function resolveParsedValue(files: UploadFile[]) {
             if (text) {
               return JSON.parse(text);
             }
-            return null;
+            return null as any;
           })
-          .catch(() => null) ?? null
+          .catch(() => null as any) ?? null as any
       );
     })
   );
@@ -464,7 +464,7 @@ const Upload = (
   }, [files]);
   // chrome86 bug: button children should not contain only empty span
   const hasChildren = hasIcon(props.prefixIcon) || !!props.text || hasIcon(props.suffixIcon);
-  
+
   const handleOnChange = (param: UploadChangeParam) => {
     const uploadingFiles = param.fileList.filter((f) => f.status === "uploading");
     // the onChange callback will be executed when the state of the antd upload file changes.
@@ -516,7 +516,7 @@ const Upload = (
             value: changeValueAction([...props.value, ...value].slice(-maxFiles), false),
             files: changeValueAction(
               uploadedFiles
-                .map((file) => _.pick(file, ["uid", "name", "type", "size", "lastModified"]))
+                .map((file: any) => _.pick(file, ["uid", "name", "type", "size", "lastModified"]))
                 .slice(-maxFiles),
               false
             ),
@@ -528,7 +528,7 @@ const Upload = (
                   ),
                 }
               : {}),
-          })
+          } as any)
         );
         props.onEvent("change");
         props.onEvent("parse");

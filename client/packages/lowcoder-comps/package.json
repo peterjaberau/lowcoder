@@ -28,7 +28,7 @@
     "mermaid": "^10.6.1",
     "react": "18.3.0",
     "react-dom": "18.3.0",
-    "typescript": "4.8.4"
+    "typescript": "^5"
   },
   "lowcoder": {
     "description": "",

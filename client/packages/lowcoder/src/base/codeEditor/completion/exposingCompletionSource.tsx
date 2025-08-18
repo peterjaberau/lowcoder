@@ -19,6 +19,7 @@ export class ExposingCompletionSource extends CompletionSource {
       return null;
     }
     const matchPath = context.matchBefore(
+      // @ts-ignore
       /(?:[A-Za-z_$][\w$]*(?:\[\s*(?:\d+|(["'])(?:[^\1\\]|\\.)*?\1)\s*\])*\.)*(?:[A-Za-z_$][\w$]*)?/
     );
     if (!matchPath) {

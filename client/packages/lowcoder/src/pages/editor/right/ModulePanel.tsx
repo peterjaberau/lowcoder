@@ -78,7 +78,7 @@ type NodeType = {
 
 
 function buildTree(elementRecord: Record<string, Array<ApplicationMeta | FolderMeta>>): NodeType {
-    const elements = elementRecord[""] || [];
+    const elements : any = elementRecord[""] || [];
     const elementMap: Record<string, NodeType> = {};
     let rootNode: NodeType = {
         name: "root",

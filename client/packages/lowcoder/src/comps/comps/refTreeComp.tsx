@@ -24,7 +24,7 @@ const treeItemComp = (childComp: MultiCompConstructor) => {
       value: valueComp<string>(""),
       items: TreeItemListComp,
     },
-    () => null
+    () => null as any
   ).build() {
     reduce(action: CompAction) {
       if (isBroadcastAction<RenameAction>(action, CompActionTypes.RENAME)) {
@@ -63,7 +63,7 @@ const treeItemComp = (childComp: MultiCompConstructor) => {
 };
 
 const Level2RefTreeComp = treeItemComp(
-  new MultiCompBuilder({ value: valueComp<string>("") }, () => null).build()
+  new MultiCompBuilder({ value: valueComp<string>("") }, () => null as any).build()
 );
 
 const Level1RefTreeComp = treeItemComp(Level2RefTreeComp);

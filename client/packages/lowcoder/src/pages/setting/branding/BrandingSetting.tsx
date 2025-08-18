@@ -57,7 +57,7 @@ enum SettingsEnum {
   WHATS_NEW_LINK = "whatsNewLink",
 }
 
-const defaultSettings = {
+const defaultSettings: any = {
   logo: null,
   squareLogo: null,
   mainBrandingColor: "#B480DE",
@@ -86,7 +86,7 @@ const defaultSettings = {
   whatsNewLink : null,
 };
 
-const settingDescription = {
+const settingDescription: any = {
   logo: "The main logo displayed in the application header",
   squareLogo: "Square or icon-style logo used where space is limited, like browser tabs or mobile headers.",
   mainBrandingColor: "Core brand color used for branding across the app.",
@@ -245,7 +245,7 @@ const getBase64 = (file: File): Promise<string> => {
     reader.onerror = error => reject(error);
   });
 };
-  
+
 const beforeUpload = (file: RcFile) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/svg+xml";
     if (!isJpgOrPng) {
@@ -401,7 +401,7 @@ export function BrandingSetting() {
         </Level1SettingPageTitle>
       </Header>
       <DetailContent>
-      
+
       {/* Branding Settings Selection */}
       <StyledBrandingSettingContent>
           <StyledThemeSettingsCover>
@@ -1056,7 +1056,7 @@ export function BrandingSetting() {
             </StyledRow>
           </Card>
         </StyledBrandingSettingContent>
-        
+
         <StyledButtonContainer gap={10}>
           <TacoButton
             buttonType="delete"

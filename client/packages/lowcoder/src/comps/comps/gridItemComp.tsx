@@ -38,7 +38,7 @@ const TmpComp = withTypeAndChildren<
   ToInstanceType<typeof childrenMap>
 >(
   (type) => {
-    const compInfo = parseCompType(type);
+    const compInfo: any = parseCompType(type);
     if (compInfo.isRemote) {
       return remoteComp(compInfo);
     }

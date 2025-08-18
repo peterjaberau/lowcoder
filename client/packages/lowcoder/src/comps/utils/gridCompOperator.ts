@@ -233,7 +233,7 @@ export class GridCompOperator {
   static async upgradeCurrentComp(editorState: EditorState) {
     const selectedComp = Object.values(editorState.selectedComps())[0];
     const compType = selectedComp.children.compType.getView();
-    const compInfo = parseCompType(compType);
+    const compInfo: any = parseCompType(compType);
 
     if (!compInfo.isRemote || compInfo.source !== "npm") {
       return;
@@ -273,6 +273,7 @@ export class GridCompOperator {
     selectedComp.children.comp.dispatch(
       deferAction(
         wrapActionExtraInfo(
+          // @ts-ignore
           replaceCompAction(remoteComp({ ...compInfo, packageVersion: latestVersion.version })),
           { compInfos }
         )

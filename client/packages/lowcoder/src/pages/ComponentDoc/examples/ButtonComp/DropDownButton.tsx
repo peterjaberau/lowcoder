@@ -5,7 +5,7 @@ import ExampleGroup from "../../common/ExampleGroup";
 
 export default function DropdownExample() {
   const blackListConfig: string[] = ["options.manual.manual"];
-  const options = {
+  const options: any = {
     optionType: "manual",
     manual: {
       manual: [
@@ -71,7 +71,7 @@ export default function DropdownExample() {
         />
       </ExampleGroup>
 
-      <ExampleGroup 
+      <ExampleGroup
       title="Layout"
       description="The Following Examples Show the Layout options of the Dropdown Component."
       >

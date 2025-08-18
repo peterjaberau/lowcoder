@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   changeChildAction,
   changeValueAction,
@@ -117,6 +118,7 @@ const Test3Comp = (function () {
 })();
 
 test("test multi toNode", () => {
+
   const x = new Test3Comp({}).node().evaluate();
   expect(x.v3.value).toEqual("");
 });

@@ -6,7 +6,7 @@ export const defaultData = {
   },
 };
 
-export const theme = {
+export const theme: any = {
   scheme: "colors",
   author: "mrmrs (http://clrs.cc)",
   base00: "#111111",
@@ -27,7 +27,7 @@ export const theme = {
   base0F: "#85144b",
 };
 
-export const defaultLottie = {
+export const defaultLottie: any = {
   v: "5.8.1",
   fr: 30,
   ip: 0,

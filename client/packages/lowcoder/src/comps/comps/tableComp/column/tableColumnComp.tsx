@@ -184,22 +184,22 @@ const ColumnInitComp = new MultiCompBuilder(columnChildrenMap, (props, dispatch)
   .setPropertyViewFn(() => <></>)
   .build();
 
-const ColumnPropertyView = React.memo(({ 
-  comp, 
-  viewMode, 
-  summaryRowIndex 
-}: { 
-  comp: ColumnComp; 
-  viewMode: string; 
-  summaryRowIndex: number; 
+const ColumnPropertyView = React.memo(({
+  comp,
+  viewMode,
+  summaryRowIndex
+}: {
+  comp: ColumnComp;
+  viewMode: string;
+  summaryRowIndex: number;
 }) => {
   const selectedColumn = comp.children.render.getSelectedComp();
-  const columnType = useMemo(() => 
+  const columnType = useMemo(() =>
     selectedColumn.getComp().children.compType.getView(),
     [selectedColumn]
   );
 
-  const initialColumns = useMemo(() => 
+  const initialColumns = useMemo(() =>
     selectedColumn.getParams()?.initialColumns as OptionType[] || [],
     [selectedColumn]
   );
@@ -444,6 +444,7 @@ export class ColumnComp extends ColumnInitComp {
     const insertMapKeys = Object.keys(renderMap).filter(key => key.startsWith(EMPTY_ROW_KEY));
     insertMapKeys.forEach(key => {
       const render = renderMap[key];
+      // @ts-ignore
       render.getComp().children.comp.children.changeValue.dispatchChangeValueAction(null);
     });
   }

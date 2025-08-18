@@ -1,4 +1,4 @@
-export const ROOT_COMP_VALUE = {
+export const ROOT_COMP_VALUE : any = {
   ui: {
     layout: [
       {

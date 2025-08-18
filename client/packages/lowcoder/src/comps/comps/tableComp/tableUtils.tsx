@@ -295,7 +295,7 @@ export function columnsToAntdFormat(
   size: string,
   dynamicColumn: boolean,
   dynamicColumnConfig: Array<string>,
-  columnsAggrData: ColumnsAggrData,
+  columnsAggrData: ColumnsAggrData | any,
   editMode: string,
   onTableEvent: (eventName: any) => void,
 ): Array<CustomColumnType<RecordType>> {
@@ -304,7 +304,7 @@ export function columnsToAntdFormat(
   const sortMap: Map<string | undefined, SortOrder> = new Map(
     sort.map((s) => [s.column, s.desc ? "descend" : "ascend"])
   );
-  const sortedColumns = _.sortBy(columns, (c) => {
+  const sortedColumns: any = _.sortBy(columns, (c) => {
     if (c.fixed === "left") {
       return -1;
     } else if (c.fixed === "right") {
@@ -318,13 +318,14 @@ export function columnsToAntdFormat(
     }
     return 0;
   });
-  return sortedColumns.flatMap((column, mIndex) => {
+  // @ts-ignore
+  return sortedColumns.flatMap((column: any, mIndex: any) => {
     if (
       columnHide({
         hide: column.hide,
         tempHide: column.tempHide,
         enableColumnSetting: enableColumnSetting,
-      })
+      } as any)
     ) {
       return [];
     }
@@ -335,7 +336,7 @@ export function columnsToAntdFormat(
     ) {
       return [];
     }
-    const tags = ((columnsAggrData[column.dataIndex] ?? {}).uniqueTags ?? []) as string[];
+    const tags: any = ((columnsAggrData[column.dataIndex] ?? {}).uniqueTags ?? []) as string[];
     const status = ((columnsAggrData[column.dataIndex] ?? {}).uniqueStatus ?? []) as {
       text: string;
       status: StatusType;
@@ -404,7 +405,7 @@ export function columnsToAntdFormat(
             sorter: {
               multiple: (sortedColumns.length - mIndex) + 1,
               compare: column.columnType === 'date' || column.columnType === 'dateTime'
-                ? (a,b) => {
+                ? (a: any,b: any) => {
                   return dayjs(a[column.dataIndex] as string).unix() - dayjs(b[column.dataIndex] as string).unix();
                 }
               : undefined
@@ -423,7 +424,7 @@ function getSortValue(sortResult: SorterResult<RecordType>) {
         column: sortResult.column.dataIndex.toString(),
         desc: sortResult.order === "descend",
       }
-    : null;
+    : null as any;
 }
 
 export function onTableChange(

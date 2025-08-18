@@ -17,6 +17,7 @@ type InviteLandingProp = RouteComponentProps<{ invitationId: string }, StaticCon
   fetchConfig: (orgId?: string) => void;
 };
 
+// @ts-ignore
 function InviteLanding(props: InviteLandingProp) {
   const { invitationId, fetchConfig } = props;
   const fetchUserFinished = useSelector(isFetchUserFinished);

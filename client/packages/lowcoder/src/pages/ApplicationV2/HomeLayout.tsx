@@ -150,7 +150,7 @@ const FilterDropdown = styled(Select)`
 
 const FilterMenuItem = styled.div`
   display: flex;
-  align-items: left;
+  align-items: start;
   height: 29px;
   width: 100%;
 `;
@@ -434,7 +434,7 @@ export function HomeLayout(props: HomeLayoutProps) {
         }
         return true;
       })
-      .filter((e) => {
+      .filter((e: any) => {
         if(!visibility) {
           if (HomeResTypeEnum[typeFilter].valueOf() === HomeResTypeEnum.All) {
             return true;
@@ -450,7 +450,7 @@ export function HomeLayout(props: HomeLayoutProps) {
         }
         return true;
       })
-      .map((e) =>
+      .map((e: any) =>
         e.folder
           ? {
               key: e.folderId,
@@ -574,7 +574,7 @@ export function HomeLayout(props: HomeLayoutProps) {
             </h1>
           </StyleHomeCover>
           <Card style={{ marginBottom: "20px" }}>
-            
+
             <OperationWrapper>
               {mode !== "folders" && mode !== "module" && (
                 <FilterDropdown
@@ -615,13 +615,13 @@ export function HomeLayout(props: HomeLayoutProps) {
                   onChange={handleSearchChange}
                   style={{ width: "192px", height: "32px", margin: "0" }}
                 />
-              
+
 
               {mode !== "trash" && mode !== "marketplace" && user.orgDev && (
-                <CreateDropdown 
-                  defaultVisible={showNewUserGuide(user)} 
-                  mode={mode} 
-                  setModify={setIsCreated} 
+                <CreateDropdown
+                  defaultVisible={showNewUserGuide(user)}
+                  mode={mode}
+                  setModify={setIsCreated}
                   modify={isCreated!} />
               )}
               </SearchWrapper>
@@ -630,7 +630,7 @@ export function HomeLayout(props: HomeLayoutProps) {
 
             <Divider />
 
-            <ContentWrapper>     
+            <ContentWrapper>
 
               {isFetching && resList.length === 0 ? (
                 <SkeletonStyle active paragraph={{ rows: 8, width: 648 }} title={false} />
@@ -642,7 +642,7 @@ export function HomeLayout(props: HomeLayoutProps) {
                         <TrashTableView resources={resList} setModify={setModify} modify={modify!}/>
                       ) : (
                         <>
-                          
+
                           {mode === "marketplace" && (
                             <>
                               {layout === "list" ? (
@@ -659,7 +659,7 @@ export function HomeLayout(props: HomeLayoutProps) {
                                     <>
                                       <h2 style={{padding: "0 36px"}}>{trans("home.globalMarketplaceTitle")}</h2>
                                       <HomeTableView resources={localMarketplaceAppsList} />
-                                    </> 
+                                    </>
                                   )}
                                 </>
                               ) : (
@@ -731,10 +731,10 @@ export function HomeLayout(props: HomeLayoutProps) {
                 />
               </PaginationLayout>
             </div> : null}
-          </Card>  
-          
+          </Card>
+
         </HomeView>
-      
+
     </Wrapper>
   );
 }

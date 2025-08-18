@@ -24,7 +24,7 @@ const IconContainer = styled.div`
   border-radius: 4px;
   box-shadow: 0 0 0 1px #ebebeb;
   background: transparent;
-  ::selection: {
+  ::selection {
     background: red;
   }
 `;
@@ -80,6 +80,7 @@ const iconExtension = ViewPlugin.fromClass(
   }
 );
 
+// @ts-ignore
 export function getIconExtension(enableIcon?: boolean) {
   return enableIcon ? iconExtension : [];
 }

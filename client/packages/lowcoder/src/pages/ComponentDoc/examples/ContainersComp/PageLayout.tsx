@@ -2,7 +2,7 @@ import { PageLayoutComp } from "comps/comps/containerComp/pageLayoutComp";
 import Example from "../../common/Example";
 import ExampleGroup from "../../common/ExampleGroup";
 
-const container={
+const container: any={
   "header": {
       "layout": {
           "f7820dbc": {
@@ -632,7 +632,7 @@ export default function PageLayoutExample() {
           <Example
             title="A simple Page Layout Component"
             hideSettings={true}
-            config={{ 
+            config={{
               container: container,
             }}
             compFactory={PageLayoutComp}
@@ -640,7 +640,7 @@ export default function PageLayoutExample() {
           <Example
             title="Disabling the Page Layout Component"
             hideSettings={true}
-            config={{ 
+            config={{
                 disabled: true,
                 container: container,
             }}
@@ -649,7 +649,7 @@ export default function PageLayoutExample() {
           <Example
             title="Hiding the Page Layout Component"
             hideSettings={true}
-            config={{ 
+            config={{
                 hidden: true,
                 container: container,
             }}
@@ -4421,7 +4421,7 @@ export default function PageLayoutExample() {
             }}
             compFactory={PageLayoutComp}
           />
-          
+
           <Example
             title="Increasing Sidebar Width"
             hideSettings={true}
@@ -5057,7 +5057,7 @@ export default function PageLayoutExample() {
           <Example
             title="Style"
             hideSettings={true}
-            config={{ 
+            config={{
               container: {
                 "header": {
                     "layout": {
@@ -5692,7 +5692,7 @@ export default function PageLayoutExample() {
           <Example
             title="Header Styling"
             hideSettings={true}
-            config={{ 
+            config={{
                 container: {
                   "header": {
                       "layout": {
@@ -8282,7 +8282,7 @@ export default function PageLayoutExample() {
             hideSettings={true}
             config={{
                 container: container,
-                animationStyle: 
+                animationStyle:
                 {
                     "animation": "bounce",
                     "animationDelay": "1s",

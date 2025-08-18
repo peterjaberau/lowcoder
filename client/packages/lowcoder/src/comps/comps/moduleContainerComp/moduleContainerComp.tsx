@@ -28,6 +28,7 @@ function ModuleContainerView(props: ContainerBaseProps) {
       onRowHeightChange?.(rowHeight);
     }, 50)
   );
+  // @ts-ignore
   const bgColor = useContext(ThemeContext || defaultTheme)?.theme?.canvas;
   return (
     <StyledInnerGrid

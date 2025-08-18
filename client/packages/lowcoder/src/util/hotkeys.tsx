@@ -30,7 +30,7 @@ export default class ReactHotkeys extends React.Component<
 > {
   public static defaultProps: IReactHotkeysProps = {
     filter(event: KeyboardEvent) {
-      const target = (event.target as HTMLElement) || event.srcElement;
+      const target: any = (event.target as HTMLElement) || event.srcElement;
       const tagName = target.tagName;
       // log.log(event);
       if (event.metaKey && event.code === "Enter") {
@@ -56,6 +56,7 @@ export default class ReactHotkeys extends React.Component<
   public isKeyDown: boolean = false;
   public preKey: string = ""; // last pressed shortcut
   public handle: HotkeysEvent;
+  // @ts-ignore
   state: {
     enableHotKey: boolean;
   };
@@ -68,7 +69,7 @@ export default class ReactHotkeys extends React.Component<
     this.handle = {} as HotkeysEvent;
     this.state = {
       enableHotKey: props.global || false,
-    };
+    } as any;
   }
 
   componentDidMount() {

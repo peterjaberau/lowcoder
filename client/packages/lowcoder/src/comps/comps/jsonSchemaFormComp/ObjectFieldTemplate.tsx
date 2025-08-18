@@ -30,7 +30,7 @@ const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
     disabled,
     readonly,
     registry,
-  } = props;
+  }: any = props;
   const containerWidth = useContainerWidth();
   const uiOptions = getUiOptions(uiSchema);
   const TitleFieldTemplate = getTemplate('TitleFieldTemplate', registry, uiOptions);
@@ -109,7 +109,7 @@ const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
   const renderSingleLevel = (level : number) => {
     return (
       <Row gutter={rowGutter}>
-        {properties.map((prop) => {
+        {properties.map((prop: any) => {
           const isArray = prop.content.props.schema.type === "array";
           const colSpan = isArray
             ? { span: 24 }
@@ -150,7 +150,7 @@ const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
                         <Col key={fieldIndex} {...colSpan}>
                           {
                             properties.find(
-                              (prop) =>
+                              (prop: any) =>
                                 prop.name ===
                                 field.scope.replace("#/properties/", "")
                             )?.content
@@ -164,7 +164,7 @@ const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
 
               if (element.type === "Control") {
                 return properties.find(
-                  (prop) =>
+                  (prop: any) =>
                     prop.name === element.scope.replace("#/properties/", "")
                 )?.content;
               }

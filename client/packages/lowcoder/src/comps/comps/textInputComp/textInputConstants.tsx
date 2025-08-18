@@ -47,7 +47,7 @@ import {
 import { RefControl } from "comps/controls/refControl";
 import { EvalParamType } from "comps/controls/actionSelector/executeCompTypes";
 
-export const TextInputValidationOptions = [
+export const TextInputValidationOptions : any = [
   {
     label: "Text",
     value: "Text",
@@ -84,8 +84,8 @@ type ValidationParams = {
   customRule: string;
 };
 
-const valueInfoMap = fromPairs(
-  TextInputValidationOptions.map((option) => [option.value, option])
+const valueInfoMap: any = fromPairs(
+  TextInputValidationOptions.map((option: any) => [option.value, option])
 );
 
 export const textInputValidate = (
@@ -222,7 +222,7 @@ export const useTextInputProps = (props: RecordConstructorToView<typeof textInpu
       propsRef.current.onEvent("change");
       changeRef.current = false;  // Reset after commit
     }, 1000)
-  );  
+  );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

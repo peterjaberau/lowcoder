@@ -101,7 +101,7 @@ function toDataView(value: any, name: string, desc?: ReactNode, modal?: boolean)
     );
   } else {
     return (
-      <PadDiv 
+      <PadDiv
         style={{marginLeft: "20px", borderBottom: "1px solid #f0f0f0", height: "32px", display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
         key={name}
       >
@@ -111,11 +111,11 @@ function toDataView(value: any, name: string, desc?: ReactNode, modal?: boolean)
 
         <div style={{ display: "flex", wordBreak: "break-all", textAlign: "right" }}>
           <span style={{marginRight: "10px"}}>{shortenedString}</span>
-          {getLen(str) > 0 && 
+          {getLen(str) > 0 &&
             <CopyTextButton text={value} style={{ color: "#ccc", marginRight: "0px", marginTop: "4px" }} />
           }
         </div>
-        
+
       </PadDiv>
     );
   }
@@ -217,7 +217,7 @@ const CollapseView = React.memo(
                     />
                   </CollapseTitleWrapper>
                 </Tooltip>
-                {Object.keys(data).length > 0 && 
+                {Object.keys(data).length > 0 &&
                   <CopyTextButton text={safeStringify(data)} style={{ color: "#aaa", marginRight: "8px"  }} />
                 }
               </div>
@@ -289,7 +289,7 @@ export const LeftContent = (props: LeftContentProps) => {
     const { items, children } = tree;
     if (Object.keys(items).length) {
       for (const i in items) {
-        const info = {
+        const info: any = {
           title: items[i].children.name.getView(),
           type: items[i].children.compType.getView() as UICompType,
           key: i,
@@ -405,7 +405,7 @@ export const LeftContent = (props: LeftContentProps) => {
                     setShowData(newData);
                   }}
                 >
-         
+
                 </div>
               </Tooltip>
             ) : (
@@ -473,7 +473,7 @@ export const LeftContent = (props: LeftContentProps) => {
       </Node>
     );
   };
-  
+
 
   const getTreeUI = (type: TreeUIKey) => {
     const uiCompInfos = _.sortBy(editorState.uiCompInfoList(), [(x) => x.name]);
@@ -504,7 +504,7 @@ export const LeftContent = (props: LeftContentProps) => {
         checkable={false}
         selectable={false}
         icon={(props: any) => props.type && (
-          <div style={{ margin: '16px 4px 0 -4px'}}> 
+          <div style={{ margin: '16px 4px 0 -4px'}}>
             {CompStateIcon[props.type as UICompType] || <LeftCommon />}
           </div>
         )}

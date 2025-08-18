@@ -26,7 +26,7 @@ const OpenAppInitAction = (function () {
       hashParam: QueryHashList,
       hideWhenNoPermission: withDefault(BoolPureControl, true),
     },
-    (props) => null
+    (props) => null as any
   )
     .setPropertyViewFn((children) => {
       return <></>;

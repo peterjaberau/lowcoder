@@ -100,7 +100,7 @@ interface ElementsState {
 
 export default function FormLoginSteps(props: FormLoginProps) {
   const dispatch = useDispatch();
-  const location = useLocation(); 
+  const location = useLocation();
   const [account, setAccount] = useState(() => {
     const { email } = (location.state || {}) as any;
     return email ?? '';
@@ -127,7 +127,7 @@ export default function FormLoginSteps(props: FormLoginProps) {
   const isEmailLoginEnabled = useMemo(() => {
     return isFormLoginEnabled && signinEnabled;
   }, [isFormLoginEnabled, signinEnabled]);
-  
+
   const isEnterpriseMode = useMemo(() => {
     return serverSettings?.LOWCODER_WORKSPACE_MODE === "ENTERPRISE" || serverSettings?.LOWCODER_WORKSPACE_MODE === "SINGLEWORKSPACE";
   }, [serverSettings]);
@@ -250,6 +250,7 @@ export default function FormLoginSteps(props: FormLoginProps) {
             <AuthBottomView>
               <StyledRouteLink to={{
                 pathname: props.organizationId ? `/org/${props.organizationId}/auth/register` : AUTH_REGISTER_URL,
+                // @ts-ignore
                 state: {...location.state || {}, email: account}
               }}>
                 {trans("userAuth.register")}
@@ -287,6 +288,7 @@ export default function FormLoginSteps(props: FormLoginProps) {
             <AuthBottomView>
               <StyledRouteLink to={{
                 pathname: props.organizationId ? `/org/${props.organizationId}/auth/register` : AUTH_REGISTER_URL,
+                // @ts-ignore
                 state: {...location.state || {}, email: account}
               }}>
                 {trans("userAuth.register")}
@@ -355,6 +357,7 @@ export default function FormLoginSteps(props: FormLoginProps) {
             <Flex justify="end" style={{margin: '10px 0'}}>
               <Link to={{
                 pathname: AUTH_FORGOT_PASSWORD_URL,
+                // @ts-ignore
                 state: {...location.state || {}, email: account}
                 }}
               >
@@ -380,6 +383,7 @@ export default function FormLoginSteps(props: FormLoginProps) {
           <AuthBottomView>
             <StyledRouteLink to={{
               pathname: AUTH_REGISTER_URL,
+              // @ts-ignore
               state: {...location.state || {}, email: account}
             }}>
               {trans("userAuth.register")}

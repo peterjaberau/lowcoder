@@ -1,6 +1,6 @@
 import { trans } from "i18n";
 
-const dsl = {
+const dsl: any = {
   ui: {
     layout: {
       "5716b58b": { i: "5716b58b", h: 5, w: 11, x: 0, y: 0 },

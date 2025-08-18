@@ -120,17 +120,17 @@ export function* fetchFolderElementsSaga(action: ReduxAction<FetchFolderElements
         });
 
         // filter out applications with NORMAL status
-        
-        const applications = response.data.data.filter((item): item is ApplicationMeta => 
+
+        const applications = response.data.data.filter((item: any): item is ApplicationMeta =>
           !item.folder && item.applicationStatus === "NORMAL"
         );
-        
+
         yield put({
           type: ReduxActionTypes.FETCH_ALL_APPLICATIONS_SUCCESS,
           payload: applications,
         });
       }
-      
+
       yield put({
         type: ReduxActionTypes.FETCH_FOLDER_ELEMENTS_SUCCESS,
         payload: { parentFolderId: action.payload.folderId, elements: response.data.data },

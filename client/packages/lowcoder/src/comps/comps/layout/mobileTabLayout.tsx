@@ -5,7 +5,7 @@ import { manualOptionsControl } from "comps/controls/optionsControl";
 import { BoolCodeControl, StringControl, jsonControl, NumberControl } from "comps/controls/codeControl";
 import { IconControl } from "comps/controls/iconControl";
 import styled from "styled-components";
-import React, { Suspense, useContext, useEffect, useMemo, useState } from "react";  
+import React, { Suspense, useContext, useEffect, useMemo, useState } from "react";
 import { registerLayoutMap } from "comps/comps/uiComp";
 import { AppSelectComp } from "comps/comps/layout/appSelectComp";
 import { NameAndExposingInfo } from "comps/utils/exposingTypes";
@@ -52,9 +52,9 @@ const AppViewContainer = styled.div`
   height: 100%;
 `;
 
-const TabLayoutViewContainer = styled.div<{ 
-    maxWidth: number; 
-    tabBarHeight: string; 
+const TabLayoutViewContainer = styled.div<{
+    maxWidth: number;
+    tabBarHeight: string;
     // verticalAlignment: string;
 }>`
   margin: 0 auto;
@@ -116,7 +116,8 @@ const StyledTabBar = styled(TabBar)<{
   .adm-tab-bar-item-icon, .adm-tab-bar-item-title {
     color: ${(props) => props.$tabStyle.text};
   }
-  .adm-tab-bar-item-icon, {
+  // @ts-ignore
+  .adm-tab-bar-item-icon {
     font-size: ${(props) => props.$navIconSize};
   }
   
@@ -207,8 +208,8 @@ function convertTreeData(data: any) {
   return data === "" ? [] : checkDataNodes(data) ?? [];
 }
 
-function TabBarView(props: TabBarProps & { 
-    tabBarHeight: string; 
+function TabBarView(props: TabBarProps & {
+    tabBarHeight: string;
     maxWidth: number;
     verticalAlignment: string;
     showSeparator: boolean;
@@ -225,7 +226,7 @@ function TabBarView(props: TabBarProps & {
         $canvasBg={canvasBg}
         $tabBarHeight={props.tabBarHeight}
         $maxWidth={props.maxWidth}
-        $verticalAlignment={props.verticalAlignment} 
+        $verticalAlignment={props.verticalAlignment}
       >
         <StyledTabBar
           onChange={(key: string) => {
@@ -312,8 +313,8 @@ let MobileTabLayoutTmp = (function () {
       initOptions: [],
     }),
     backgroundImage: withDefault(StringControl, ""),
-    tabBarHeight: withDefault(StringControl, "56px"), 
-    navIconSize: withDefault(StringControl, "32px"), 
+    tabBarHeight: withDefault(StringControl, "56px"),
+    navIconSize: withDefault(StringControl, "32px"),
     maxWidth: withDefault(NumberControl, 450),
     verticalAlignment: dropdownControl(VerticalAlignmentOptions, "stretch"),
     showSeparator: withDefault(BoolCodeControl, true),
@@ -323,7 +324,7 @@ let MobileTabLayoutTmp = (function () {
     navItemActiveStyle: styleControl(NavLayoutItemActiveStyle, 'navItemActiveStyle'),
   };
   return new MultiCompBuilder(childrenMap, (props, dispatch) => {
-    return null;
+    return null as any;
   })
     .setPropertyViewFn((children) => {
       const [styleSegment, setStyleSegment] = useState('normal')

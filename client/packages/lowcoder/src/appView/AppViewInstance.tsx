@@ -100,10 +100,10 @@ export class AppViewInstance<I = any, O = any> {
                 applicationDSL: {},
                 moduleDSL: {},
               }
-            };
+            } as any;
           }
         });
-      
+
       await DatasourceApi.fetchJsDatasourceByApp(this.appId).then((res) => {
         res.data?.data?.forEach((i) => {
           registryDataSourcePlugin(i.type, i.id, i.pluginDefinition);

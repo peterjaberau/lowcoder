@@ -356,7 +356,7 @@ const DeviceWrapper = ({
   const [Wrapper, setWrapper] = useState<React.ElementType | null>(null);
 
   useEffect(() => {
-    const loadWrapper = async () => {
+    const loadWrapper: any = async () => {
       if (deviceType === "tablet") {
         const { IPadMockup } = await import("react-device-mockup");
         setWrapper(() => IPadMockup);
@@ -364,6 +364,7 @@ const DeviceWrapper = ({
         const { IPhoneMockup } = await import("react-device-mockup");
         setWrapper(() => IPhoneMockup);
       } else {
+        // @ts-ignore
         setWrapper(() => null);
       }
     };
@@ -515,7 +516,7 @@ function EditorView(props: EditorViewProps) {
         </ViewBody>
       );
     }
-    
+
     return uiComp.getView();
   }, [
     showAppSnapshot,
@@ -607,7 +608,7 @@ function EditorView(props: EditorViewProps) {
       </CustomShortcutWrapper>
     );
   }
-  
+
   // history mode, display with the right panel, a little trick
   const showRight = panelStatus.right || showAppSnapshot;
 
@@ -748,7 +749,7 @@ function EditorView(props: EditorViewProps) {
                         <LeftPreloadIcon />
                         {trans("leftPanel.toolbarPreload")}
                       </PreloadDiv>
-                      
+
                       {props.preloadComp.getJSLibraryPropertyView()}
                     </>
                   )}

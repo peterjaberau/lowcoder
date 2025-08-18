@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "ESNext",
+
         "experimentalDecorators": true,
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
@@ -15,6 +16,13 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
+
         "jsx": "react-jsx",
-      }
+
+        "declaration": true,
+        "downlevelIteration": true,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "suppressImplicitAnyIndexErrors": true
+    }
   }

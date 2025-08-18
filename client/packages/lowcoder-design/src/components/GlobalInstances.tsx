@@ -12,7 +12,7 @@ export default () => {
   messageInstance = staticFunction.message;
   modalInstance = staticFunction.modal;
   notificationInstance = staticFunction.notification;
-  return null;
+  return null as any;
 };
 
 export { messageInstance, notificationInstance, modalInstance };

@@ -160,7 +160,7 @@ const FixHeightReactQuill = styled.div<Props>`
   ${(props) => (props.$hideToolbar ? hideToolbarStyle(props.$style) : "")};
 `;
 
-const toolbarOptions = [
+const toolbarOptions: any = [
   [{ header: [1, 2, 3, false] }],
   ["bold", "italic", "underline", "strike", "blockquote"],
   [{ list: "ordered" }, { list: "bullet" }],

@@ -21,7 +21,7 @@ const TemporaryStateItemCompBase = new MultiCompBuilder(
       name: SimpleNameComp,
       value: jsonValueStateControl(null),
     },
-    () => null
+    () => null as any
   )
   .setPropertyViewFn((children) => {
     return (

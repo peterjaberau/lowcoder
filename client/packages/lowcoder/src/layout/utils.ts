@@ -298,10 +298,10 @@ export function cascade(layout: Layout, priorLayout: Layout = {}): Layout {
     priorLayout,
     _.mapValues(
       _.pickBy(layout, (item) => item.isDragging),
-      (item) => ({ ...item, isDragging: undefined })
+      (item) => ({ ...item, isDragging: undefined } as any)
     )
   );
-  layout = _.mapValues(layout, (item) => ({ ...item, isDragging: undefined }));
+  layout = _.mapValues(layout, (item) => ({ ...item, isDragging: undefined } as any));
   let staticLayout = getStatics(layout);
   staticLayout = { ...staticLayout, ...priorLayout };
   if (_.size(priorLayout) > 0) {

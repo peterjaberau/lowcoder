@@ -57,7 +57,7 @@ export function FolderView() {
   const allFolders = useSelector(foldersSelector);
   const user = useSelector(getUser);
 
-  const folder = allFolders.filter((f) => f.folderId === folderId)[0] || {};
+  const folder: any = allFolders.filter((f) => f.folderId === folderId)[0] || {};
   const breadcrumbs = getBreadcrumbs(folder, allFolders, [
     {
       text: folder.name,

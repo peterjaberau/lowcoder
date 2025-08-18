@@ -50,12 +50,12 @@ let ExpansionControlTmp = (function () {
       expandable: BoolControl,
       slot: ContextSlotControl,
     },
-    () => ({ expandableConfig: {}, expandModalView: null })
+    () => ({ expandableConfig: {}, expandModalView: null as any })
     )
     .setControlItemData({ filterText: label })
     .setPropertyViewFn((children, dispatch) => {
       return (
-        <> 
+        <>
           {children.expandable.propertyView({ label })}
           {children.expandable.getView() &&
             children.slot
@@ -71,6 +71,7 @@ let ExpansionControlTmp = (function () {
 export class ExpansionControl extends ExpansionControlTmp {
   getView() {
     if (!this.children.expandable.getView()) {
+      // @ts-ignore
       return { expandableConfig: {}, expandModalView: null };
     }
     const selectedContainer = this.children.slot.getSelectedComp();

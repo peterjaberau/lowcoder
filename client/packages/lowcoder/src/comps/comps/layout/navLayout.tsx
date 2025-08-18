@@ -205,7 +205,7 @@ let NavTmpLayout = (function () {
     navItemActiveStyle: styleControl(NavLayoutItemActiveStyle, 'navItemActiveStyle'),
   };
   return new MultiCompBuilder(childrenMap, (props) => {
-    return null;
+    return null as any;
   })
     .setPropertyViewFn((children) => {
       const [styleSegment, setStyleSegment] = useState('normal')
@@ -330,7 +330,7 @@ NavTmpLayout = withViewFn(NavTmpLayout, (comp) => {
   const onMenuItemClick = useCallback(({ key }: { key: string }) => {
     onEvent('click')
     const itemComp = itemKeyRecord[key]
-  
+
     const url = [
       ALL_APPLICATIONS_URL,
       pathParam.applicationId,
@@ -518,7 +518,7 @@ NavTmpLayout = withViewFn(NavTmpLayout, (comp) => {
 
   const pageView = useMemo(() => {
     let pageView = <EmptyContent text="" style={{ height: "100%" }} />;
-    
+
     if(dataOptionType === DataOption.Manual) {
       const selectedItem = (itemKeyRecord[selectedKey] as LayoutMenuItemComp);
       if (selectedItem && !selectedItem.children.hidden.getView()) {

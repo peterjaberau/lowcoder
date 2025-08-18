@@ -130,11 +130,12 @@ function UserRegister() {
     ) {
       history.push(
         AUTH_LOGIN_URL,
+        // @ts-ignore
         {...location.state || {}, email: account},
       )
     };
   }, [serverSettings]);
-  
+
   const afterLoginSuccess = () => {
     // used invitation link or organization login url then set cookie
     if (organizationId && !isEnterpriseMode) {
@@ -171,6 +172,7 @@ function UserRegister() {
             messageInstance.error('Email is already registered');
             history.push(
               AUTH_LOGIN_URL,
+              // @ts-ignore
               {...location.state || {}, email: account},
             )
           }

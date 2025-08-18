@@ -34,7 +34,7 @@
     "@types/react-dom": "^18.2.18",
     "lowcoder-cli": "workspace:^",
     "lowcoder-sdk": "workspace:^",
-    "typescript": "4.8.4",
+    "typescript": "^5",
     "vite": "^4.5.5"
   }
 }

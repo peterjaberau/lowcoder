@@ -17,6 +17,7 @@ export interface DatasourceDataState {
     fetchingDatasources?: boolean;
     fetchingStructure?: boolean;
   };
+  [key: string]: any;
 }
 
 const initialState: DatasourceDataState = {
@@ -127,14 +128,14 @@ const datasourceReducer = createReducer(initialState, {
     state: DatasourceDataState,
     action: ReduxAction<UpdateDatasourcePermissionPayload>
   ): DatasourceDataState => {
-    const info = state.permissionInfo[action.payload.datasourceId] ?? {};
-    info.userPermissions = info.userPermissions.map((p) => {
+    const info : any = state.permissionInfo[action.payload.datasourceId] ?? {};
+    info.userPermissions = info.userPermissions.map((p: any) => {
       if (p.permissionId === action.payload.permissionId) {
         return { ...p, role: action.payload.role };
       }
       return p;
     });
-    info.groupPermissions = info.groupPermissions.map((p) => {
+    info.groupPermissions = info.groupPermissions.map((p: any) => {
       if (p.permissionId === action.payload.permissionId) {
         return { ...p, role: action.payload.role };
       }
@@ -149,12 +150,12 @@ const datasourceReducer = createReducer(initialState, {
     state: DatasourceDataState,
     action: ReduxAction<DeleteDatasourcePermissionPayload>
   ): DatasourceDataState => {
-    const info = state.permissionInfo[action.payload.datasourceId] ?? {};
+    const info: any = state.permissionInfo[action.payload.datasourceId] ?? {};
     info.userPermissions = info.userPermissions.filter(
-      (p) => p.permissionId !== action.payload.permissionId
+      (p: any) => p.permissionId !== action.payload.permissionId
     );
     info.groupPermissions = info.groupPermissions.filter(
-      (p) => p.permissionId !== action.payload.permissionId
+      (p: any) => p.permissionId !== action.payload.permissionId
     );
     state.permissionInfo[action.payload.datasourceId] = info;
 

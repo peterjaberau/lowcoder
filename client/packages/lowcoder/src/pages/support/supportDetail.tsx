@@ -71,7 +71,7 @@ const AttachmentWrapper = styled.div`
   margin-bottom: 16px;
 `;
 
-const toolbarOptions = [
+const toolbarOptions: any = [
   ['bold', 'italic', 'underline'], // Basic formatting options
   [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
   [{ 'header': [1, 2, 3, false] }], // Headers
@@ -112,7 +112,7 @@ const convertJiraToMarkdown = (content: string) => {
         const columns = line.split('|').filter(Boolean).length;
         // Create the markdown dashes row for headers
         const dashes = '| ' + new Array(columns).fill('-').join(' | ') + ' |';
-        return line + '\n' + dashes; 
+        return line + '\n' + dashes;
       } else {
         // If already in a table, just return the row as it is
         return line;
@@ -328,14 +328,14 @@ export function SupportDetail() {
       setIsSavingDescription(false); // End loading state
     }
   };
-  
+
 
   // Handle adding a comment
   const handleAddComment = async () => {
     if (newComment.trim()) {
       setIsAddingComment(true); // Start loading state
       try {
-        await addComment(ticketId, newComment); 
+        await addComment(ticketId, newComment);
         message.success(trans("support.ticketCommentAdded"));
         setNewComment(''); // Clear input after submission
         await fetchTicket(); // Refresh the ticket data
@@ -349,30 +349,30 @@ export function SupportDetail() {
       message.warning(trans("support.ticketCommentEmpty"));
     }
   };
-  
+
 
   // Handle attachment upload
   const handleUpload = async () => {
     if (attachmentFile) {
       setIsUploading(true); // Start loading state
-      
+
       const getBase64 = (file: File): Promise<string> => {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file); // Read file as base64
-  
+
           reader.onload = () => resolve(reader.result as string);
           reader.onerror = error => reject(error);
         });
       };
-  
+
       try {
         const base64File = await getBase64(attachmentFile);
-  
+
         await uploadAttachment(ticketId, base64File, attachmentFile.name, attachmentFile.type);
-  
+
         message.success(trans("support.ticketAttachmentUploaded"));
-  
+
         // Clear file input after successful upload
         setFileList([]); // Clear the file list
         setAttachmentFile(null); // Clear the selected file in state
@@ -387,7 +387,7 @@ export function SupportDetail() {
     } else {
       message.warning(trans("support.ticketAttachmentEmpty"));
     }
-  };  
+  };
 
 
   if (loading) {
@@ -465,9 +465,9 @@ export function SupportDetail() {
                 modules={{ toolbar: toolbarOptions }}
                 style={{ marginBottom: '8px' }}
               />
-              <Button 
-                type="primary" 
-                onClick={handleSaveDescription} 
+              <Button
+                type="primary"
+                onClick={handleSaveDescription}
                 style={{ marginTop: '8px' }}
                 loading={isSavingDescription}
                 disabled={isSavingDescription}
@@ -542,7 +542,7 @@ export function SupportDetail() {
               renderItem={(comment: any) => (
                 <List.Item>
                   <List.Item.Meta
-                    avatar={<Avatar src={comment.author.accountId == "712020:a25c863c-bd24-456e-aa3f-2335c18e0235" ? user.avatarUrl :  comment.author.avatarUrls['48x48']} />} 
+                    avatar={<Avatar src={comment.author.accountId == "712020:a25c863c-bd24-456e-aa3f-2335c18e0235" ? user.avatarUrl :  comment.author.avatarUrls['48x48']} />}
                     title={comment.author.accountId == "712020:a25c863c-bd24-456e-aa3f-2335c18e0235" ? trans("support.selfUser") : comment.author.displayName}
                     description={
                       <>
@@ -552,7 +552,7 @@ export function SupportDetail() {
                           </Text>
                         </div>
                         {renderMarkdown(comment.body)}
-                        {comment.attachments && comment.attachments.length > 0 && 
+                        {comment.attachments && comment.attachments.length > 0 &&
                           comment.attachments.map((attachment: any) => renderAttachment(attachment))}
                       </>
                     }
@@ -572,9 +572,9 @@ export function SupportDetail() {
             onChange={(e) => setNewComment(e.target.value)}
             placeholder={trans("support.writeComment")}
           />
-          <Button 
-            type="primary" 
-            onClick={handleAddComment} 
+          <Button
+            type="primary"
+            onClick={handleAddComment}
             style={{ marginTop: '8px' }}
             loading={isAddingComment}
             disabled={isAddingComment}

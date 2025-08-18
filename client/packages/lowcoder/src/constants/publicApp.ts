@@ -1,7 +1,7 @@
 export const PUBLIC_APP_ID = "public_app";
 export const PUBLIC_APP_ORG_ID = "645b53eb86b4c862d8ae0fb9";
 
-export const publicAppResponse = {
+export const publicAppResponse: any = {
   status: 200,
   statusText: 'OK',
   headers: {},
@@ -119,7 +119,7 @@ export const publicAppResponse = {
   }
 };
 
-export const publicAppJSDatasourceResponse = {
+export const publicAppJSDatasourceResponse: any = {
   status: 200,
   statusText: 'OK',
   headers: {},

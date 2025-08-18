@@ -332,19 +332,19 @@ export const CompSelectionWrapper = React.memo((props: {
           $showDashLine: editorState.showGridLines() || props.hidden,
           $isSelected: props.isSelected,
           $isHidden: props.hidden,
-        }
+        } as any
       : {
           $hover: undefined,
           $showDashLine: false,
           $isSelected: false,
           $isHidden: false,
-        };
-  }, [
+        } as any;
+  } , [
     hover,
     props.hidden,
     props.isSelected,
     props.isSelectable,
-  ]);  
+  ]);
 
   const zIndex = useMemo(() => {
     return props.isSelected

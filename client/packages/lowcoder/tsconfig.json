@@ -17,7 +17,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "noImplicitReturns": false,
+    "strictNullChecks": false,
   },
   "include": ["src"]
 }

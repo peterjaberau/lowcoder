@@ -23,6 +23,7 @@ it("test action handler", (done) => {
 
   const clear = {
     ...addOne,
+    // @ts-ignore
     action: undefined,
   };
 

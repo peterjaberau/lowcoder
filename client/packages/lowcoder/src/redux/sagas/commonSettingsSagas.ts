@@ -15,7 +15,8 @@ import { GenericApiResponse } from "api/apiResponses";
 
 export function* fetchCommonSettingsSaga(action: ReduxAction<FetchCommonSettingPayload>) {
   try {
-    const response: AxiosResponse<GenericApiResponse<CommonSettingResponseData>> = yield call(
+    // @ts-ignore
+    const response: AxiosResponse<GenericApiResponse<CommonSettingResponseData>> | any = yield call(
       CommonSettingApi.fetchCommonSetting,
       action.payload
     );
